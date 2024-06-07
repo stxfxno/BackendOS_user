@@ -1,10 +1,7 @@
 package backend.myevent.MyEvent.news.application.internal.queryservices;
 
 import backend.myevent.MyEvent.news.domain.model.aggregates.User;
-import backend.myevent.MyEvent.news.domain.model.queries.GetUserByNameAndSurnameQuery;
-import backend.myevent.MyEvent.news.domain.model.queries.GetUserByCorreoQuery;
-import backend.myevent.MyEvent.news.domain.model.queries.GetUserByIdQuery;
-import backend.myevent.MyEvent.news.domain.model.queries.GetAllUserByNewsApiKeyQuery;
+import backend.myevent.MyEvent.news.domain.model.queries.*;
 
 import backend.myevent.MyEvent.news.domain.services.UserQueryService;
 import backend.myevent.MyEvent.news.infraestructure.persistence.jpa.UserSourceRepository;
@@ -41,6 +38,11 @@ public class UserQueryServiceImpl implements UserQueryService{
     @Override
     public Optional<User> handle(GetUserByNameAndSurnameQuery query) {
         return userSourceRepository.findByNameAndSurname(query.name(), query.surname());
+    }
+
+    @Override
+    public List<User> handle(GetAllUsersQuery query) {
+        return userSourceRepository.findAll();
     }
 
 }
